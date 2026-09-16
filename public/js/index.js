@@ -106,9 +106,7 @@ class ConversorNotaciones {
         const tipoOriginal = this.identificarNotacion(tokens);
         
         // Convertimos la entrada a Postfija dependiendo de lo que el usuario haya escrito
-        let tokensPostfijos = tipoOriginal === 'Postfija' ? tokens 
-            : tipoOriginal === 'Prefija' ? this.prefijaAPostfija(tokens) 
-            : this.infijaAPostfija(tokens);
+        let tokensPostfijos = tipoOriginal === 'Postfija' ? tokens : tipoOriginal === 'Prefija' ? this.prefijaAPostfija(tokens) : this.infijaAPostfija(tokens);
 
         // Devolvemos un objeto con todas las variantes procesadas
         return {
@@ -121,7 +119,7 @@ class ConversorNotaciones {
 }
 
 
-// Instanciamos el conversor (la clase debe estar arriba)
+// Instanciamos el conversor
 const conversor = new ConversorNotaciones();
     
 // Obtenemos los valores directos del HTML con su ID
@@ -140,7 +138,6 @@ btnLimpiar.addEventListener('click', () => {
     entradaExpresion.value = ''; 
     contenedorResultados.innerHTML = ''; 
     contenedorResultados.classList.add('d-none'); 
-    entradaExpresion.focus(); // Agregué el focus para mayor comodidad
 });
 
 // Lógica encargada de validar y procesar lo que escribió el usuario, es el filtro inicial
@@ -148,17 +145,17 @@ function procesarEntrada() {
     const textoEntrada = entradaExpresion.value.trim();
     
     if (!textoEntrada) {
-        mostrarError('Por favor, ingresa una expresión válida.');
+        mostrarError('Por favor, ingresa una expresión válida ');
         return;
     }
 
     try {
         const resultado = conversor.procesar(textoEntrada);
         // Si el procesamiento es exitoso mostramos el resultado, si no, lanzamos error 
-        resultado ? mostrarExito(resultado) : mostrarError('No se pudo interpretar la expresión.');
+        resultado ? mostrarExito(resultado) : mostrarError('No se pudo interpretar la expresión ');
     } catch (error) {
         // Este catch atrapa errores graves como que falte un paréntesis o un operador inválido
-        mostrarError('Error de sintaxis. Revisa los operadores y paréntesis.');
+        mostrarError('Error de sintaxis. Revisa los operadores y paréntesis ');
     }
 }
 
